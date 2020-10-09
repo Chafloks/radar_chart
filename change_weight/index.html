@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pokemon growth</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+</head>
+
+<body>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="stockInput">Pokemon</label>
+        <input type="text" class="form-control" id="Pokemon1" placeholder="Enter pokemon1">
+        <input type="text" class="form-control" id="Pokemon2" placeholder="Enter pokemon2">
+      </div>
+      <button id="submit" type="submit" class="btn btn-default">Compare</button>
+    </form>
+    <div id="plot"></div>
+    <canvas id="myChart1" width="200" height="200"></canvas>
+    <canvas id="myChart2" width="200" height="200"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="app.js"></script>
+  </body>
+
+  </html>
