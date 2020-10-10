@@ -51,6 +51,7 @@ function buildPlot(pokemon1,pokemon2) {
             });
         });
     });
+    
     d3.json(url2).then(function(data2) {
         console.log(data2.growth_rate.url)
         var growth_url = data2.growth_rate.url;
