@@ -20,70 +20,43 @@ function handleSubmit() {
 function buildPlot(pokemon1,pokemon2) {
     var url1 = `https://pokeapi.co/api/v2/pokemon-species/${pokemon1}`;
     var url2 = `https://pokeapi.co/api/v2/pokemon-species/${pokemon2}`;
-    d3.json(url1).then(function(data1) {
-        console.log(data1.growth_rate.url)
-        var growth_url = data1.growth_rate.url;
-
-        d3.json(growth_url).then(function(data_growth){
-            var levels = data_growth.levels
-            var experience = []
-            var numbs = []
-            var name = data_growth.name;
-            for (i=0;i<levels.length;i++){
-                experience.push(levels[i].experience)
-                numbs.push(i+1)
-            };
-            var ctx = document.getElementById('myChart1').getContext('2d');
-            var myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: `${pokemon1}`,
-                        data: experience,
-                        borderColor: "#000080"
-                    }],
-                    labels: numbs
-                },
-                options: {title: {
-                    display: true,
-                    text: `${name}`
-                }}
-            });
-        });
-    });
-    
-    d3.json(url2).then(function(data2) {
-        console.log(data2.growth_rate.url)
-        var growth_url = data2.growth_rate.url;
-
-        d3.json(growth_url).then(function(data_growth){
-            var levels = data_growth.levels
-            var experience = []
-            var numbs = []
-            var name = data_growth.name;
-            console.log(data_growth.name);
-            for (i=0;i<levels.length;i++){
-                experience.push(levels[i].experience)
-                numbs.push(i+1)
-            };
-            var ctx = document.getElementById('myChart2').getContext('2d');
-            var myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [{
+    Promise.all([d3.json(url1),d3.json(url2)]).then(function(data){
+        growth = data;
+        var growth_url1 = data[0].growth_rate.url
+        var growth_url2 = data[1].growth_rate.url
+  
+        Promise.all([d3.json(growth_url1),d3.json(growth_url2)]).then(function(data_growth){
+          var levels1 = data_growth[0].levels
+          var experience1 = [];
+          var numbs = [];
+          var levels2 = data_growth[1].levels
+          var experience2 = [];
+          for (i=0;i<levels1.length;i++){
+            experience1.push(levels1[i].experience)
+            numbs.push(i)
+          };
+          for (i=0;i<levels2.length;i++){
+            experience2.push(levels2[i].experience)
+          };
+          var ctx = document.getElementById('myChart1').getContext('2d');
+              var myLineChart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                      datasets: [{
+                          label: `${pokemon1}`,
+                          data: experience1,
+                          borderColor: "#000080"
+                      },
+                      {
                         label: `${pokemon2}`,
-                        data: experience,
+                        data: experience2,
                         borderColor: "#FF0000"
-                    }],
-                    labels: numbs
-                },
-                options: {title: {
-                    display: true,
-                    text: `${name}`
-                }}
-            });
+                      }],
+                      labels: numbs
+                  }
+              });
         });
-    });
+      });
 };
 // Add event listener for submit button
 d3.select("#submit").on("click", handleSubmit);
