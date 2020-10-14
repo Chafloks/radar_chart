@@ -45,6 +45,7 @@ function buildPlot(pokemon) {
         // creates radar chart
         var ctx = document.getElementById('myChart').getContext('2d');
         var myRadarChart = new Chart(ctx, {
+		height:400,
         type: 'radar',
         data: {
         labels: lables,
