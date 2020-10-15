@@ -69,8 +69,7 @@ function buildPlot(pokemon) {
                 }
             }
         }).Line(data, {
-					responsive:true,
-					maintainAspectRatio: false
+					responsive:false
 					});
     });
 
