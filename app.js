@@ -54,6 +54,7 @@ function buildPlot(pokemon) {
             }]
             },
         options: {
+            responsive: false,
             scale:{
                 ticks: {
                     beginAtZero: true,
