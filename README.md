@@ -1,2 +1,2 @@
 # radar_chart
- chart.js test
+Creating a Radar chart using javascript and chart.js, the information is taken from an Pokemon API.
